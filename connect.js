@@ -30,15 +30,28 @@ const restrict = (req, res, next) => {
   const user = auth[0];
   const pass = auth[1];
 
-  if (scheme.search(/^basic$/i) && isAuthenticatedUser(user, pass)) {
+  if (scheme.search(/^basic$/i) === 0 && isAuthenticatedUser(user, pass)) {
     return next();
   } else {
     return next(new Error('Unauthorizated'));
   }
 };
 
+const admin = (req, res) => {
+  switch (req.url) {
+    case '/':
+      res.end('try /users');
+      break;
+    case '/users':
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(['tobi', 'loki', 'jane']));
+      break;
+  }
+};
+
 connect()
   .use(logger)
   .use('/admin', restrict)
+  .use('/admin', admin)
   .use(hello)
   .listen(3000);
