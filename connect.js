@@ -1,10 +1,5 @@
 const connect = require('connect');
-
-const logger = (req, res, next) => {
-  // eslint-disable-next-line no-console
-  console.log('%s %s', req.method, req.url);
-  next();
-};
+const logger = require('./logger');
 
 const hello = (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
@@ -49,9 +44,10 @@ const admin = (req, res) => {
   }
 };
 
-connect()
-  .use(logger)
+const app = connect()
+  .use(logger(':method :url'))
   .use('/admin', restrict)
   .use('/admin', admin)
-  .use(hello)
-  .listen(3000);
+  .use(hello);
+
+app.listen(3000);
