@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-in-action-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akihisa1210/nodejs-in-action-express.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akihisa1210/nodejs-in-action-express/issues"
+  },
+  "homepage": "https://github.com/akihisa1210/nodejs-in-action-express#readme"
+}
