@@ -1,5 +1,22 @@
 const connect = require('connect');
+const router = require('./middleware/router');
 const logger = require('./middleware/logger');
+
+const routes = {
+  GET: {
+    '/users': (req, res) => {
+      res.end('tobi, loki, ferret');
+    },
+    '/users/:id': (req, res, id) => {
+      res.end('user ' + id);
+    }
+  },
+  DELETE: {
+    '/user/:id': (req, res, id) => {
+      res.end('deleted user ' + id);
+    }
+  }
+};
 
 const hello = (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
@@ -45,6 +62,7 @@ const admin = (req, res) => {
 };
 
 const app = connect()
+  .use(router(routes))
   .use(logger(':method :url'))
   .use('/admin', restrict)
   .use('/admin', admin)
